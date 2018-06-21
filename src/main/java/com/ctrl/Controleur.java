@@ -39,6 +39,11 @@ public class Controleur extends HttpServlet {
     ArrayList<Employe> listeEmployes;
     ArrayList<Identifiants> listeCredentials;
     Employe employe;
+    Employe employe1;
+    Employe employe2;
+    Employe employe3;
+    Employe employe4;
+    Employe employe5;
     Identifiants user;
     String idEmploye = EmployesConstantes.FRM_ID_EMPL_SELECT;
 
@@ -91,27 +96,30 @@ public class Controleur extends HttpServlet {
                             listeCredentials.clear();
                             listeCredentials.addAll(emEmploye.getIdentifiants());
 
-                            for (Identifiants userBase : listeCredentials) {
+                            for (int i = 0; i < listeCredentials.size(); i++) {
+                                ArrayList<Identifiants> userBase = listeCredentials;
+                                //                            for (Identifiants userBase : listeCredentials) {
                                 //Si le login et le mot de passe entrées correspondent aux login et mot
                                 //de passe présents en base, créer un utilisateur et l'envoyer
                                 //vers la page de tableauEmployes.
-                                if (userBase.getLogin().equals(loginForm) && userBase.getMdp().equals(mdpForm)) {
-                                      request.getRequestDispatcher(EmployesConstantes.PAGE_BIENVENUE).forward(request, response);
+                                if (userBase.get(i).getLogin().equals(loginForm) && userBase.get(i).getMdp().equals(mdpForm)) {
+                                    request.getRequestDispatcher(EmployesConstantes.PAGE_BIENVENUE).forward(request, response);
                                     //listeEmployes = employeBD.getListeEmployes();
 //                                    listeEmployes.clear();
 //                                    listeEmployes.addAll(emEmploye.getEmployes());
 //                                    //request.setAttribute("cleListeEmployes", listeEmployes);
 //                                    request.setAttribute("cleListeEmployes", listeEmployes);
 //                                    request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
+
                                 } //Sinon envoyer vers la page d'accueil avec un message d'erreur.
-                                else {
-                                    request.setAttribute("cleMessageErreur", EmployesConstantes.ERREUR_INFOS_CONN_KO);
-                                    request.getRequestDispatcher(EmployesConstantes.PAGE_INDEX).forward(request, response);
-                                }
                             }
+                            request.setAttribute("cleMessageErreur", EmployesConstantes.ERREUR_INFOS_CONN_KO);
+                            request.getRequestDispatcher(EmployesConstantes.PAGE_INDEX).forward(request, response);
+
                         }
                     }
                     break;
+  
 
                 case EmployesConstantes.ACTION_SUPPRIMER:
                     if (request.getParameter(idEmploye) != null) {
@@ -126,18 +134,18 @@ public class Controleur extends HttpServlet {
                         request.setAttribute("cleListeEmployes", listeEmployes);
                         request.setAttribute("CLE_TEST_SUPPRIMER_SUCCES", EmployesConstantes.SUCCES_SUPPR);
                         request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
-                    }
-                    else {
-                        
-                      listeEmployes.clear();
+                    } else {
+
+                        listeEmployes.clear();
                         listeEmployes.addAll(emEmploye.getEmployes());
                         request.setAttribute("cleListeEmployes", listeEmployes);
                         request.setAttribute("CLE_TEST_SUPPRIMER_ECHEC", EmployesConstantes.ERREUR_SUPPR);
-                        request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);  
+                        request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
                     }
                     break;
 
                 case EmployesConstantes.ACTION_MODIFIER:
+                    
                     //employe = (EmployeBean) session.getAttribute("employe");
                     int idEmp = (Integer) session.getAttribute("idEmp");
 
@@ -159,9 +167,13 @@ public class Controleur extends HttpServlet {
                     listeEmployes.clear();
                     listeEmployes.addAll(emEmploye.getEmployes());
                     request.setAttribute("cleListeEmployes", listeEmployes);
-                    request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
 
+                    session.setAttribute("employe", employe);
+                    request.getRequestDispatcher(EmployesConstantes.PAGE_DETAIL_EMPLOYE).forward(request, response);
+
+//                    request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
                     break;
+//                    
 
                 case EmployesConstantes.ACTION_DETAILS:
                     if (request.getParameter(idEmploye) != null) {
@@ -180,17 +192,15 @@ public class Controleur extends HttpServlet {
                     listeEmployes.clear();
                     listeEmployes.addAll(emEmploye.getEmployes());
                     request.setAttribute("cleListeEmployes", listeEmployes);
-                    request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response); 
+                    request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
                     break;
-                    
-                    
-                    
+
                 case EmployesConstantes.ACTION_AJOUTER:
                     request.getRequestDispatcher(EmployesConstantes.PAGE_AJOUT_EMPLOYE).forward(request, response);
                     break;
-                    
+
                 case EmployesConstantes.ACTION_ADD_EMPLOYE:
-                    
+
                     employe = new Employe(
                             request.getParameter(EmployesConstantes.CHAMP_NOM),
                             request.getParameter(EmployesConstantes.CHAMP_PRENOM),
@@ -201,44 +211,24 @@ public class Controleur extends HttpServlet {
                             request.getParameter(EmployesConstantes.CHAMP_CODEPOSTAL),
                             request.getParameter(EmployesConstantes.CHAMP_VILLE),
                             request.getParameter(EmployesConstantes.CHAMP_EMAIL));
-  
-                    
+
                     emEmploye.ajouterEmploye(employe);
-                    
+
                     listeEmployes.clear();
                     listeEmployes.addAll(emEmploye.getEmployes());
                     request.setAttribute("cleListeEmployes", listeEmployes);
                     request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
                     break;
-                    
-                    
+
                 case EmployesConstantes.ACTION_CREER_EMPLOYES:
-                    request.getRequestDispatcher(EmployesConstantes.PAGE_RECRUTER).forward(request, response);
-                    break;
-                    
-                case EmployesConstantes.ACTION_RECRUTER:
-                    
-                    /*
-                    employe = new Employe(
-                            request.getParameter(EmployesConstantes.CHAMP_NOM1),
-                            request.getParameter(EmployesConstantes.CHAMP_PRENOM1),
-                            request.getParameter(EmployesConstantes.CHAMP_TELDOMICILE1),
-                            request.getParameter(EmployesConstantes.CHAMP_TELPORTABLE1),
-                            request.getParameter(EmployesConstantes.CHAMP_TELPRO1),
-                            request.getParameter(EmployesConstantes.CHAMP_ADRESSE1),
-                            request.getParameter(EmployesConstantes.CHAMP_CODEPOSTAL1),
-                            request.getParameter(EmployesConstantes.CHAMP_VILLE1),
-                            request.getParameter(EmployesConstantes.CHAMP_EMAIL1));
-                    
-                    emEmploye.recruterEmployes(employe);
-                    
+ 
+                    emEmploye.recruterEmployes(employe1);
+
+
                     listeEmployes.clear();
                     listeEmployes.addAll(emEmploye.getEmployes());
                     request.setAttribute("cleListeEmployes", listeEmployes);
                     request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
-
-                    break;*/
-
                     break;
 
             }

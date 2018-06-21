@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-@Table(name = "Employes")
+@Table(name = "EMPLOYES")
 @NamedQueries(
         {
             @NamedQuery(name = "recupererTousLesEmployes", query = "SELECT e FROM Employe e")

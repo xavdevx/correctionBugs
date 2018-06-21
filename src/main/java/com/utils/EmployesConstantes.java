@@ -9,10 +9,10 @@ public final class EmployesConstantes {
 //    public static final String DB_PWD = "dbPwd";
 
     //Requêtes SQL
-    public static final String SQL_DELETE_EMPLOYES = "DELETE FROM EMPLOYES WHERE ID=";
-    public static final String SQL_SELECT_EMPLOYES_ID = "SELECT * FROM EMPLOYES WHERE ID=";
-    public static final String SQL_SELECT_TOUS_EMPLOYES = "SELECT * FROM EMPLOYES";
-    public static final String SQL_SELECT_IDENTIFIANTS = "SELECT * from IDENTIFIANTS";
+//    public static final String SQL_DELETE_EMPLOYES = "DELETE FROM EMPLOYES WHERE ID=";
+//    public static final String SQL_SELECT_EMPLOYES_ID = "SELECT * FROM EMPLOYES WHERE ID=";
+//    public static final String SQL_SELECT_TOUS_EMPLOYES = "SELECT * FROM EMPLOYES";
+//    public static final String SQL_SELECT_IDENTIFIANTS = "SELECT * from IDENTIFIANTS";
 
 
     //Constantes lié aux actions / submit
@@ -24,7 +24,6 @@ public final class EmployesConstantes {
     public static final String ACTION_LOGIN = "Login";
     public static final String ACTION_AJOUTER = "Ajouter";
     public static final String ACTION_ADD_EMPLOYE = "Ajouter Employe";
-    public static final String ACTION_RECRUTER = "Recruter";
     public static final String ACTION_CREER_EMPLOYES = "Créer 5 Employés";
 
     //Constantes représentant les input de type text ou radio
@@ -60,6 +59,6 @@ public final class EmployesConstantes {
     public static final String PAGE_DETAIL_EMPLOYE = "/WEB-INF/Vue/detailsEmploye.jsp";
     public static final String PAGE_AJOUT_EMPLOYE = "/WEB-INF/Vue/ajoutEmploye.jsp";
     public static final String PAGE_BIENVENUE = "/WEB-INF/Vue/bienvenue.jsp";
-    public static final String PAGE_RECRUTER = "/WEB-INF/Vue/recruterEmployes.jsp";
+
 
 }
