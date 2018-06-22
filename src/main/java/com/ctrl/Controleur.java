@@ -103,6 +103,7 @@ public class Controleur extends HttpServlet {
                                 //de passe présents en base, créer un utilisateur et l'envoyer
                                 //vers la page de tableauEmployes.
                                 if (userBase.get(i).getLogin().equals(loginForm) && userBase.get(i).getMdp().equals(mdpForm)) {
+                                    request.setAttribute("cleLoginForm", loginForm);
                                     request.getRequestDispatcher(EmployesConstantes.PAGE_BIENVENUE).forward(request, response);
                                     //listeEmployes = employeBD.getListeEmployes();
 //                                    listeEmployes.clear();

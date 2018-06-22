@@ -17,7 +17,7 @@
         <div class="container" style="margin-top:30px">
             <div class="col-md-4">
                 
-                <h1>Bienvenue admin!</h1>
+                <h1>Bienvenue ${cleLoginForm} !</h1>
                 <h2>Choisissez votre action:</h2>
                 <div class="login-panel panel panel-default">
                     <div class="panel-body">

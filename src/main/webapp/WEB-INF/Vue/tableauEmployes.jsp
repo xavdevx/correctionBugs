@@ -53,12 +53,23 @@
                         </c:forEach>
 
                     </table>
+                       
                     
-                    <legend> <font color="green">${CLE_TEST_SUPPRIMER_SUCCES}</font> </legend>
-                    <legend> <font color="red">${CLE_TEST_SUPPRIMER_ECHEC}</font>  </legend>
+                    <c:if test="${!empty CLE_TEST_SUPPRIMER_SUCCES}">
+                    <font color="green">${CLE_TEST_SUPPRIMER_SUCCES}</font> 
+                    <br>
+                     </c:if>
+                    
+                      
+                    <c:if test="${!empty CLE_TEST_SUPPRIMER_ECHEC}">
+                    <font color="red">${CLE_TEST_SUPPRIMER_ECHEC}</font> 
+                    <br>
+                     </c:if>
+                   
                     
                     
                     <c:if test="${!empty cleListeEmployes}">
+                     
                     <input type="submit" name="action" value="Supprimer" class="btn btn-primary"/>
                     <input type="submit" name="action" value="Details" class="btn btn-primary"/>
                     </c:if>
