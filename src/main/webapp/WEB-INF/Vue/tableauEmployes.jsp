@@ -65,6 +65,11 @@
                     <font color="red">${CLE_TEST_SUPPRIMER_ECHEC}</font> 
                     <br>
                      </c:if>
+                    
+                    <c:if test="${!empty CLE_TEST_DETAILS_ECHEC}">
+                    <font color="red">${CLE_TEST_DETAILS_ECHEC}</font> 
+                    <br>
+                     </c:if>
                    
                     
                     

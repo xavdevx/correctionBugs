@@ -186,6 +186,14 @@ public class Controleur extends HttpServlet {
                         request.getRequestDispatcher(EmployesConstantes.PAGE_DETAIL_EMPLOYE).forward(request, response);
 
                     }
+                    else {
+
+                        listeEmployes.clear();
+                        listeEmployes.addAll(emEmploye.getEmployes());
+                        request.setAttribute("cleListeEmployes", listeEmployes);
+                        request.setAttribute("CLE_TEST_DETAILS_ECHEC", "Vous n'avez pas sélectionné d'employé !");
+                        request.getRequestDispatcher(EmployesConstantes.PAGE_TOUS_LES_EMPLOYES).forward(request, response);
+                    }
                     break;
 
                 case EmployesConstantes.ACTION_VOIR_LISTE:
